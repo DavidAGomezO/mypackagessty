@@ -1,0 +1,31 @@
+%% Identification
+%% The package identifies itself and the LaTeX version needed
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{calcDG}[2023/04/16 Calculus package]
+
+%% Required packages and preliminary definitions
+\RequirePackage{mathtools}
+\RequirePackage{derivative}
+\RequirePackage{suffix}
+
+%% Options passed to the package
+\DeclareOption*{\PackageWarning{calcDG}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+%% Body of the package
+
+\ExplSyntaxOn
+\NewDocumentEnvironment{syseq}{ D(){[,]} D<>{1} O{l}}%
+{
+    \RenewDocumentCommand\arraystretch{}{#2}
+    \clist_set:Nn \l_tma_clist{ #1 }
+    \tl_set:Nn \l_left_tl {\clist_item:Nn \l_tma_clist{1}}
+    \tl_set:Nn \l_right_tl {\clist_item:Nn \l_tma_clist{2}}
+
+    \left\l_left_tl
+    \begin{matrix*}[#3]
+}{
+    \end{matrix*}
+    \right\l_right_tl
+}
+\ExplSyntaxOff
