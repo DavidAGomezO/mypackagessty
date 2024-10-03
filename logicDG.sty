@@ -60,8 +60,8 @@
   #1 & \quad\WhyCommandLeftDelimiter\;\text{{#2}}\;\WhyCommandRightDelimiter
 }
 
-\NewDocumentCommand\wff{m}%
-  	{ & \displaystyle#1}
+\NewDocumentCommand\wff{O{0pt} m}%
+  	{ & \hspace{#1}\begin{matrix*}[l] #2\end{matrix*}}
 
 \NewDocumentCommand\theo{O{}mm}%
 {
