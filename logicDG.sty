@@ -69,16 +69,17 @@
   #1 \vdash_{\text{#2}} #3 
 }
 
+\newcolumntype{L}{>{$}l<{$}}
+
 \NewDocumentEnvironment{derivation}{D<>{1.2} O{0pt}}{
   % begin
   \RenewDocumentCommand{\arraystretch}{}{#1}
   \setlength{\arraycolsep}{#2}
-  \begin{tabular}{ll}
+  \begin{tabular}{lL}
 }{
   % end
   \end{tabular}
 }
-\newcolumntype{L}{>{$}l<{$}}
 
 \NewDocumentEnvironment{longderivation}{D<>{1.2} O{0pt}}{
   % begin
