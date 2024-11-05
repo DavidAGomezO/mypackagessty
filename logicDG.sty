@@ -57,11 +57,12 @@
 
 \NewDocumentCommand\why{O{\WhyDefaultConnector}m}%
 {
-  #1 & \quad\WhyCommandLeftDelimiter\;\text{{#2}}\;\WhyCommandRightDelimiter
+  #1 & \quad\WhyCommandLeftDelimiter\;
+  \begin{tabular}{ll}
+    #2
+  \end{tabular}
+  \;\WhyCommandRightDelimiter
 }
-
-\NewDocumentCommand\wff{O{0pt} m}%
-  	{ & \hspace{#1}\begin{matrix*}[l] #2\end{matrix*}}
 
 \NewDocumentCommand\theo{O{}mm}%
 {
