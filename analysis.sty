@@ -104,43 +104,18 @@
 \makeatother
 
 \ExplSyntaxOn
-% Lower integral
-\NewDocumentCommand\lowint{D[]{} m m}%
-{
-  \clist_set:Nn \l_lims_clist { #1 }
-  \tl_set:Nn \l_inf_tl {\clist_item:Nn \l_lims_clist {1} }
-  \tl_set:Nn \l_sup_tl {\clist_item:Nn \l_lims_clist {2} }
+\NewDocumentCommand{\diff}{m}
+ {
+  \perner_diff_build:n { #1 }
+ }
 
-  \lowerint
-  ^{\l_sup_tl}
-  \sb{\l_inf_tl}
-  #2\,\mathrm{d}#3
-}
+\seq_new:N \l__perner_diff_seq
 
-% Upper integral
-\NewDocumentCommand\upint{D[]{} m m}%
-{
-  \clist_set:Nn \l_lims_clist { #1 }
-  \tl_set:Nn \l_inf_tl {\clist_item:Nn \l_lims_clist {1} }
-  \tl_set:Nn \l_sup_tl {\clist_item:Nn \l_lims_clist {2} }
-
-  \upperint
-  ^{\l_sup_tl}
-  \sb{\l_inf_tl}
-  #2\,\mathrm{d}#3
-}
-
-% Standard integral
-\NewDocumentCommand\Int{D[]{} m m}%
-{
-  \clist_set:Nn \l_lims_clist { #1 }
-  \tl_set:Nn \l_inf_tl {\clist_item:Nn \l_lims_clist {1} }
-  \tl_set:Nn \l_sup_tl {\clist_item:Nn \l_lims_clist {2} }
-
-  \int
-  ^{\l_sup_tl}
-  \sb{\l_inf_tl}
-  #2\,\mathrm{d}#3
-}
+\cs_new_protected:Nn \perner_diff_build:n
+ {
+  \seq_set_split:Nnn \l__perner_diff_seq { , } { \mathrm{d}#1 }
+  \seq_use:Nn \l__perner_diff_seq { \,\mathrm{d} \c_group_begin_token }
+  \prg_replicate:nn { \seq_count:N \l__perner_diff_seq - 1 } { \c_group_end_token }
+ }
 \ExplSyntaxOff
 

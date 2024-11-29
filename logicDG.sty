@@ -8,6 +8,7 @@
 \RequirePackage{mathtools}
 \RequirePackage{nicematrix}
 \RequirePackage{longtable}
+\RequirePackage{suffix}
 \newcommand{\WhyCommandLeftDelimiter}{\left<}
 \newcommand{\WhyCommandRightDelimiter}{\right>}
 \newcommand{\WhyDefaultConnector}{\equiv}
@@ -54,8 +55,11 @@
     \left(\exists #1 \,\middle|\, #2 \,:\, #3\right)
   }
 }
-
 \NewDocumentCommand\why{O{\WhyDefaultConnector}m}%
+{
+  #1 & \quad\WhyCommandLeftDelimiter\text{#2}\WhyCommandRightDelimiter
+}
+\WithSuffix\NewDocumentCommand\why*{O{\WhyDefaultConnector}m}%
 {
   #1 & \quad\WhyCommandLeftDelimiter\;
   \begin{tabular}{ll}
